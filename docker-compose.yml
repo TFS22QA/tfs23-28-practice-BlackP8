@@ -10,7 +10,9 @@ services:
       POSTGRES_PASSWORD: passworddb
       POSTGRES_DB: example_db
   app:
-    image: app
+    build:
+      dockerfile: DockerFile
+    container_name: application
     depends_on:
       - postgres
     ports:
