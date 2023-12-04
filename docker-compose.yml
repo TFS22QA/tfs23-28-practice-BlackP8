@@ -1,0 +1,21 @@
+version: '3.0'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: userdb
+      POSTGRES_PASSWORD: passworddb
+      POSTGRES_DB: example_db
+  app:
+    image: app
+    depends_on:
+      - postgres
+    ports:
+      - "8080:80"
+    environment:
+      SPRING_DATASOURCE_USERNAME: userdb
+      SPRING_DATASOURCE_PASSWORD: passworddb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/example_db
